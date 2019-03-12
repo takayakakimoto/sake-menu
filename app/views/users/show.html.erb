@@ -1,0 +1,12 @@
+<div class="user-profile">
+  <div class="icon text-center">
+    <img src="<%= gravatar_url(@user, size: 100) %>" alt="" class="img-circle">
+  </div>
+  <div class="name text-center">
+    <h1><%= @user.name %></h1>
+    <%= render 'relationships/follow_button', user:  @user %>
+    <% if current_user ==@user %>
+      <%= link_to "ユーザ削除", @user, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-md' %>
+    <% end %>
+  </div>
+</div>
