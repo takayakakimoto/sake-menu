@@ -1,0 +1,23 @@
+<% if @results %>
+  <div class="row">
+    <% @results.each do |sake| %>
+      <div class="sakes">
+        <div class="col-md-3 col-sm-4 col-xs-12">
+          <div class="panel panel-default">
+            <div class="panel-heading text-center">
+                <コード><%= sake[:sake_identify_code] %>
+            </div>
+            <div class="panel-body">
+              <p class="sake-title"> 
+              <酒名><%= sake[:sake_name] %><br>
+              <ふりがな><%= sake[:sake_furigana] %></p>
+              <酒蔵><%= sake[:maker_name] %><br>
+              <酒蔵住所><br><%= sake[:maker_address] %><br>
+              <酒蔵URL><br><%= link_to 'Search', sake[:maker_url] %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

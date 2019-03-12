@@ -43,3 +43,24 @@ footer {
   font-weight: bold;
   letter-spacing: 0.15em;
 }
+
+.search {
+  margin-bottom: 20px;
+}
+
+/* item */
+.sakes .panel-body {
+  height: 200px;
+  word-break: break-all;
+}
+.sakes .panel-heading {
+  height: 50px;
+}
+
+p.sake-title {
+  /* 文の行数を2行に保ち、最後に ... を追加するスタイル */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
