@@ -1,9 +1,13 @@
 class SakesController < ApplicationController
-  #before_action :require_user_logged_in
+  before_action :require_user_logged_in
+  
+  def show
+    @sake = Sake.find(params[:id])
+    @want_users = @sake.want_users
+  end
   
   def new
-    @sakes = []
-    
+   
     require 'open-uri'
     
     
@@ -13,14 +17,21 @@ class SakesController < ApplicationController
       uri = URI.encode("https://www.sakenote.com/api/v1/sakes?token=#{api_key}&sake_name=#{@keyword}")
       res = open(uri)
       json_string = res.read
-      @results = JSON.parse(json_string, { symbolize_names: true })[:sakes]
+      results = JSON.parse(json_string, { symbolize_names: true })[:sakes]
+      
+      @sakes = []
+
+      results.each do |result|
+       sake = Sake.find_or_initialize_by(id: [:sake_id])
+       sake.identify_code = result[:sake_identify_code]
+       sake.name = result[:sake_name]
+       sake.furigana = result[:sake_furigana]
+       sake.maker_name = result[:maker_name]
+       sake.maker_address = result[:maker_address]
+       sake.maker_url = result[:maker_url]
+       @sakes.push(sake)
+      end
     end
   end
-    
-    
- 
-  
-private
-  
 end
 
