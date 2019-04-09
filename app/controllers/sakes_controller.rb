@@ -22,7 +22,8 @@ class SakesController < ApplicationController
       @sakes = []
 
       results.each do |result|
-       sake = Sake.find_or_initialize_by(id: [:sake_id])
+        #binding.pry
+       sake = Sake.find_or_initialize_by(identify_code: result[:sake_identify_code])
        sake.identify_code = result[:sake_identify_code]
        sake.name = result[:sake_name]
        sake.furigana = result[:sake_furigana]
@@ -31,6 +32,7 @@ class SakesController < ApplicationController
        sake.maker_url = result[:maker_url]
        @sakes.push(sake)
       end
+      
     end
   end
 end
